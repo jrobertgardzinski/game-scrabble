@@ -1,0 +1,9 @@
+{
+	"points scored": 0 if player skipped turn (optionally draw letters) 
+		or has failed challange against another player and scored same score,
+	"challanged by": "player_id" 
+		or "" if wasn't challanged,
+	"tile rack": [{"letter":"A", "score":1}, and 6 others],
+	"drawn tiles": [{"letter":"T", "score":2}] or [] if skipped turn,
+	"used tiles": [{"letter":"A", "score":1}],
+}
