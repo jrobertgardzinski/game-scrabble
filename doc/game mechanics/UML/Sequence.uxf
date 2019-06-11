@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?><diagram program="umlet" version="13.3">
-  <zoom_level>6</zoom_level>
+  <zoom_level>12</zoom_level>
   <element>
     <id>UMLGeneric</id>
     <coordinates>
-      <x>96</x>
-      <y>108</y>
-      <w>60</w>
-      <h>18</h>
+      <x>24</x>
+      <y>192</y>
+      <w>120</w>
+      <h>36</h>
     </coordinates>
     <panel_attributes>game: Game</panel_attributes>
     <additional_attributes/>
@@ -14,10 +14,10 @@
   <element>
     <id>UMLGeneric</id>
     <coordinates>
-      <x>576</x>
-      <y>216</y>
-      <w>126</w>
-      <h>18</h>
+      <x>984</x>
+      <y>408</y>
+      <w>252</w>
+      <h>36</h>
     </coordinates>
     <panel_attributes>gameBoard: GameBoard</panel_attributes>
     <additional_attributes/>
@@ -25,10 +25,10 @@
   <element>
     <id>UMLGeneric</id>
     <coordinates>
-      <x>468</x>
-      <y>216</y>
-      <w>90</w>
-      <h>18</h>
+      <x>768</x>
+      <y>408</y>
+      <w>180</w>
+      <h>36</h>
     </coordinates>
     <panel_attributes>tileBag: TileBag</panel_attributes>
     <additional_attributes/>
@@ -36,10 +36,10 @@
   <element>
     <id>UMLGeneric</id>
     <coordinates>
-      <x>120</x>
-      <y>150</y>
-      <w>12</w>
-      <h>54</h>
+      <x>72</x>
+      <y>276</y>
+      <w>24</w>
+      <h>108</h>
     </coordinates>
     <panel_attributes/>
     <additional_attributes/>
@@ -47,10 +47,10 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>120</x>
-      <y>120</y>
-      <w>18</w>
-      <h>42</h>
+      <x>72</x>
+      <y>216</y>
+      <w>36</w>
+      <h>84</h>
     </coordinates>
     <panel_attributes>lt=.</panel_attributes>
     <additional_attributes>10.0;50.0;10.0;10.0</additional_attributes>
@@ -58,10 +58,10 @@
   <element>
     <id>UMLFrame</id>
     <coordinates>
-      <x>270</x>
-      <y>246</y>
-      <w>288</w>
-      <h>90</h>
+      <x>372</x>
+      <y>468</y>
+      <w>576</w>
+      <h>180</h>
     </coordinates>
     <panel_attributes>loop (n)
 --
@@ -72,21 +72,21 @@ fg=red</panel_attributes>
   <element>
     <type>com.baselet.element.old.element.Relation</type>
     <coordinates>
-      <x>108</x>
-      <y>186</y>
-      <w>30</w>
-      <h>234</h>
+      <x>48</x>
+      <y>348</y>
+      <w>60</w>
+      <h>468</h>
     </coordinates>
     <panel_attributes>lt=.</panel_attributes>
-    <additional_attributes>18;222;18;18</additional_attributes>
+    <additional_attributes>36;444;36;36</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>324</x>
-      <y>120</y>
-      <w>18</w>
-      <h>180</h>
+      <x>480</x>
+      <y>216</y>
+      <w>36</w>
+      <h>360</h>
     </coordinates>
     <panel_attributes>lt=.</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;280.0</additional_attributes>
@@ -94,10 +94,10 @@ fg=red</panel_attributes>
   <element>
     <id>UMLGeneric</id>
     <coordinates>
-      <x>324</x>
-      <y>288</y>
-      <w>12</w>
-      <h>36</h>
+      <x>480</x>
+      <y>552</y>
+      <w>24</w>
+      <h>72</h>
     </coordinates>
     <panel_attributes/>
     <additional_attributes/>
@@ -105,10 +105,10 @@ fg=red</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>330</x>
-      <y>282</y>
-      <w>192</w>
-      <h>24</h>
+      <x>492</x>
+      <y>540</y>
+      <w>384</w>
+      <h>48</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-
 drawTiles(7): List&lt;Tile&gt;</panel_attributes>
@@ -117,10 +117,10 @@ drawTiles(7): List&lt;Tile&gt;</panel_attributes>
   <element>
     <id>UMLGeneric</id>
     <coordinates>
-      <x>510</x>
-      <y>288</y>
-      <w>12</w>
-      <h>36</h>
+      <x>852</x>
+      <y>552</y>
+      <w>24</w>
+      <h>72</h>
     </coordinates>
     <panel_attributes/>
     <additional_attributes/>
@@ -128,10 +128,10 @@ drawTiles(7): List&lt;Tile&gt;</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>510</x>
-      <y>228</y>
-      <w>18</w>
-      <h>72</h>
+      <x>852</x>
+      <y>432</y>
+      <w>36</w>
+      <h>144</h>
     </coordinates>
     <panel_attributes>lt=.</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;100.0</additional_attributes>
@@ -139,10 +139,10 @@ drawTiles(7): List&lt;Tile&gt;</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>330</x>
-      <y>300</y>
-      <w>192</w>
-      <h>24</h>
+      <x>492</x>
+      <y>576</y>
+      <w>384</w>
+      <h>48</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
 [starting set of 7 tiles]:</panel_attributes>
@@ -151,10 +151,10 @@ drawTiles(7): List&lt;Tile&gt;</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>126</x>
-      <y>150</y>
-      <w>132</w>
-      <h>36</h>
+      <x>84</x>
+      <y>276</y>
+      <w>264</w>
+      <h>72</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-
 r2=DeterminePlayersOrder()</panel_attributes>
@@ -163,10 +163,10 @@ r2=DeterminePlayersOrder()</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>642</x>
-      <y>228</y>
-      <w>18</w>
-      <h>192</h>
+      <x>1116</x>
+      <y>432</y>
+      <w>36</w>
+      <h>384</h>
     </coordinates>
     <panel_attributes>lt=.</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;300.0</additional_attributes>
@@ -174,10 +174,10 @@ r2=DeterminePlayersOrder()</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>324</x>
-      <y>318</y>
-      <w>18</w>
-      <h>102</h>
+      <x>480</x>
+      <y>612</y>
+      <w>36</w>
+      <h>204</h>
     </coordinates>
     <panel_attributes>lt=.</panel_attributes>
     <additional_attributes>10.0;150.0;10.0;10.0</additional_attributes>
@@ -185,10 +185,10 @@ r2=DeterminePlayersOrder()</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>510</x>
-      <y>318</y>
-      <w>18</w>
-      <h>102</h>
+      <x>852</x>
+      <y>612</y>
+      <w>36</w>
+      <h>204</h>
     </coordinates>
     <panel_attributes>lt=.</panel_attributes>
     <additional_attributes>10.0;150.0;10.0;10.0</additional_attributes>
@@ -196,21 +196,21 @@ r2=DeterminePlayersOrder()</panel_attributes>
   <element>
     <type>com.baselet.element.old.element.Relation</type>
     <coordinates>
-      <x>360</x>
-      <y>78</y>
-      <w>54</w>
-      <h>42</h>
+      <x>552</x>
+      <y>132</y>
+      <w>108</w>
+      <h>84</h>
     </coordinates>
     <panel_attributes>lt=&lt;</panel_attributes>
-    <additional_attributes>18;30;42;18</additional_attributes>
+    <additional_attributes>36;60;84;36</additional_attributes>
   </element>
   <element>
     <type>com.baselet.element.old.element.Note</type>
     <coordinates>
-      <x>384</x>
-      <y>78</y>
-      <w>48</w>
-      <h>18</h>
+      <x>600</x>
+      <y>132</y>
+      <w>96</w>
+      <h>36</h>
     </coordinates>
     <panel_attributes>n = 2..4
 bg=yellow</panel_attributes>
@@ -219,10 +219,10 @@ bg=yellow</panel_attributes>
   <element>
     <id>UMLGeneric</id>
     <coordinates>
-      <x>276</x>
-      <y>108</y>
-      <w>102</w>
-      <h>18</h>
+      <x>384</x>
+      <y>192</y>
+      <w>204</w>
+      <h>36</h>
     </coordinates>
     <panel_attributes>players: Player[n]</panel_attributes>
     <additional_attributes/>
@@ -230,10 +230,10 @@ bg=yellow</panel_attributes>
   <element>
     <id>UMLFrame</id>
     <coordinates>
-      <x>90</x>
-      <y>408</y>
-      <w>630</w>
-      <h>54</h>
+      <x>12</x>
+      <y>792</y>
+      <w>1260</w>
+      <h>108</h>
     </coordinates>
     <panel_attributes>fg=#3c7a00
 ref
@@ -244,10 +244,10 @@ ref
   <element>
     <id>UMLFrame</id>
     <coordinates>
-      <x>84</x>
-      <y>354</y>
-      <w>642</w>
-      <h>126</h>
+      <x>0</x>
+      <y>684</y>
+      <w>1284</w>
+      <h>252</h>
     </coordinates>
     <panel_attributes>loop
 halign=left
@@ -259,10 +259,10 @@ fg=blue</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>120</x>
-      <y>456</y>
-      <w>18</w>
-      <h>54</h>
+      <x>72</x>
+      <y>888</y>
+      <w>36</w>
+      <h>108</h>
     </coordinates>
     <panel_attributes>lt=.</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;70.0</additional_attributes>
@@ -270,10 +270,10 @@ fg=blue</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>324</x>
-      <y>456</y>
-      <w>18</w>
-      <h>84</h>
+      <x>480</x>
+      <y>888</y>
+      <w>36</w>
+      <h>168</h>
     </coordinates>
     <panel_attributes>lt=.</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;120.0</additional_attributes>
@@ -281,10 +281,10 @@ fg=blue</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>642</x>
-      <y>456</y>
-      <w>18</w>
-      <h>84</h>
+      <x>1116</x>
+      <y>888</y>
+      <w>36</w>
+      <h>168</h>
     </coordinates>
     <panel_attributes>lt=.</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;120.0</additional_attributes>
@@ -292,10 +292,10 @@ fg=blue</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>510</x>
-      <y>456</y>
-      <w>18</w>
-      <h>84</h>
+      <x>852</x>
+      <y>888</y>
+      <w>36</w>
+      <h>168</h>
     </coordinates>
     <panel_attributes>lt=.</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;120.0</additional_attributes>
@@ -303,10 +303,10 @@ fg=blue</panel_attributes>
   <element>
     <id>UMLState</id>
     <coordinates>
-      <x>90</x>
-      <y>498</y>
-      <w>84</w>
-      <h>24</h>
+      <x>12</x>
+      <y>972</y>
+      <w>168</w>
+      <h>48</h>
     </coordinates>
     <panel_attributes>send
 gameReport
@@ -316,10 +316,10 @@ type=sender</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>120</x>
-      <y>516</y>
-      <w>18</w>
-      <h>36</h>
+      <x>72</x>
+      <y>1008</y>
+      <w>36</w>
+      <h>72</h>
     </coordinates>
     <panel_attributes>lt=.</panel_attributes>
     <additional_attributes>10.0;40.0;10.0;10.0</additional_attributes>
@@ -327,21 +327,21 @@ type=sender</panel_attributes>
   <element>
     <type>com.baselet.element.old.element.Relation</type>
     <coordinates>
-      <x>498</x>
-      <y>174</y>
-      <w>30</w>
-      <h>54</h>
+      <x>828</x>
+      <y>324</y>
+      <w>60</w>
+      <h>108</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>18;42;18;18</additional_attributes>
+    <additional_attributes>36;84;36;36</additional_attributes>
   </element>
   <element>
     <id>UMLSpecialState</id>
     <coordinates>
-      <x>324</x>
-      <y>522</y>
-      <w>12</w>
-      <h>12</h>
+      <x>480</x>
+      <y>1020</y>
+      <w>24</w>
+      <h>24</h>
     </coordinates>
     <panel_attributes>type=termination</panel_attributes>
     <additional_attributes/>
@@ -349,10 +349,10 @@ type=sender</panel_attributes>
   <element>
     <id>UMLSpecialState</id>
     <coordinates>
-      <x>510</x>
-      <y>522</y>
-      <w>12</w>
-      <h>12</h>
+      <x>852</x>
+      <y>1020</y>
+      <w>24</w>
+      <h>24</h>
     </coordinates>
     <panel_attributes>type=termination</panel_attributes>
     <additional_attributes/>
@@ -360,10 +360,10 @@ type=sender</panel_attributes>
   <element>
     <id>UMLSpecialState</id>
     <coordinates>
-      <x>642</x>
-      <y>522</y>
-      <w>12</w>
-      <h>12</h>
+      <x>1116</x>
+      <y>1020</y>
+      <w>24</w>
+      <h>24</h>
     </coordinates>
     <panel_attributes>type=termination</panel_attributes>
     <additional_attributes/>
@@ -371,10 +371,10 @@ type=sender</panel_attributes>
   <element>
     <id>UMLSpecialState</id>
     <coordinates>
-      <x>120</x>
-      <y>534</y>
-      <w>12</w>
-      <h>12</h>
+      <x>72</x>
+      <y>1044</y>
+      <w>24</w>
+      <h>24</h>
     </coordinates>
     <panel_attributes>type=termination</panel_attributes>
     <additional_attributes/>
@@ -382,14 +382,14 @@ type=sender</panel_attributes>
   <element>
     <type>com.baselet.element.old.element.Relation</type>
     <coordinates>
-      <x>114</x>
-      <y>174</y>
-      <w>546</w>
-      <h>54</h>
+      <x>60</x>
+      <y>324</y>
+      <w>1092</w>
+      <h>108</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
 m2=&lt;&lt;create&gt;&gt;
 </panel_attributes>
-    <additional_attributes>534;42;534;18;18;18</additional_attributes>
+    <additional_attributes>1068;84;1068;36;36;36</additional_attributes>
   </element>
 </diagram>
