@@ -1,9 +1,19 @@
 package gamemechanics;
 
+import java.util.EnumSet;
+
 public class Tile {
 	private char letter;
 	private int points;
 
+	public Tile(char letter) {
+		for (gamemechanics.enums.Tile tile : gamemechanics.enums.Tile.values()) {
+			if (tile.getLetter() == letter) {	
+				this.letter = tile.getLetter();
+				this.points = tile.getPoints();
+			}
+		}
+	}
 	public Tile(gamemechanics.enums.Tile tile) {		
 		this.letter = tile.getLetter();
 		this.points = tile.getPoints();

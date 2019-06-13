@@ -11,8 +11,8 @@ import java.util.stream.Stream;
 import gamemechanics.enums.Premium;
 
 public class GameBoard {
-	private Map<Coordinates, Tile> tilesArrangement = new HashMap<Coordinates, Tile>(); 
-	private Map<Coordinates, Tile> previosulyPlayedTiles = new HashMap<Coordinates, Tile>();
+	private List<Field> tilesArrangement = new LinkedList<Field>(); 
+	private List<Field> previosulyPlayedTiles = new LinkedList<Field>();
 	//Premium fields coordinates
 	private final Coordinates CenterField = new Coordinates(8, 8);
 	private final Coordinates[] doubleLetter = {
@@ -107,19 +107,19 @@ public class GameBoard {
 		Arrays.stream(tripleWord).forEach(element -> {premiumFields.put(element, Premium.TRIPLE_WORD);});
 	}
 	
-	public Map<Coordinates, Tile> getTilesArrangement() {
+	public List<Field> getTilesArrangement() {
 		return tilesArrangement;
 	}
 
-	public void setTilesArrangement(Map<Coordinates, Tile> tilesArrangement) {
+	public void setTilesArrangement(List<Field> tilesArrangement) {
 		this.tilesArrangement = tilesArrangement;
 	}
 
-	public Map<Coordinates, Tile> getPreviosulyPlayedTiles() {
+	public List<Field> getPreviosulyPlayedTiles() {
 		return previosulyPlayedTiles;
 	}
 
-	public void setPreviosulyPlayedTiles(Map<Coordinates, Tile> previosulyPlayedTiles) {
+	public void setPreviosulyPlayedTiles(List<Field> previosulyPlayedTiles) {
 		this.previosulyPlayedTiles = previosulyPlayedTiles;
 	}
 	
@@ -129,17 +129,17 @@ public class GameBoard {
 	}
 	
 	public void updateTheBoardAndFlushPreviouslyPlayedTiles() {
-		this.tilesArrangement.putAll(previosulyPlayedTiles);
+		this.tilesArrangement.addAll(previosulyPlayedTiles);
 		flushPreviouslyPlayedTiles();
 	}
 	
-	public Map<Coordinates, Tile> removePreviouslyPlayedTiles() {
-		Map<Coordinates, Tile> playedTiles = new HashMap(this.previosulyPlayedTiles);
+	public List<Field> removePreviouslyPlayedTiles() {
+		List<Field> playedTiles = new LinkedList(this.previosulyPlayedTiles);
 		flushPreviouslyPlayedTiles();
 		return playedTiles;
 	}
 	
-	public void playTiles(Map<Coordinates, Tile> playedTiles) {
+	public void playTiles(List<Field> playedTiles) {
 		if (isFirstPlayedWord() && noneOfTilesPlacedOnCenterOfGameBoard(playedTiles)) {
 			throw new IllegalArgumentException("First played word must be placed on the center of game board!");
 		}
@@ -162,47 +162,52 @@ public class GameBoard {
 		return this.previosulyPlayedTiles.isEmpty() && this.tilesArrangement.isEmpty();
 	}
 	
-	private boolean noneOfTilesPlacedOnCenterOfGameBoard(Map<Coordinates, Tile> playedTiles) {
-		return !playedTiles.containsKey(CenterField);
+	private boolean noneOfTilesPlacedOnCenterOfGameBoard(List<Field> playedTiles) {
+		return !playedTiles.stream()
+				.anyMatch(tile -> tile.getCoordinates().equals(CenterField));
 	}
 
 	// TODO use groupBy rather than two streams
-	private boolean tilesArrangedInLine(Map<Coordinates, Tile> playedTiles) {
+	private boolean tilesArrangedInLine(List<Field> playedTiles) {
 		boolean xCoordinatesChangesCorrectly =
-				playedTiles.keySet().stream()
-				.map(Coordinates::getX)
+				playedTiles.stream()
+				.map(Field::getCoordinates)
 				.distinct()
 				.limit(2)
 				.count() == 1;
 		boolean yCoordinatesChangesCorrectly =
-				playedTiles.keySet().stream()
-				.map(Coordinates::getY)
+				playedTiles.stream()
+				.map(Field::getCoordinates)
 				.distinct()
 				.limit(2)
 				.count() == 1;
 		return xCoordinatesChangesCorrectly || yCoordinatesChangesCorrectly;
 	}
 
-	private boolean atLeastOneFieldIsAlreadyOccupied(Map<Coordinates, Tile> playedTiles) {
-		return playedTiles.keySet().stream()
-				.filter(coordinates -> this.tilesArrangement.containsKey(coordinates))
+	private boolean atLeastOneFieldIsAlreadyOccupied(List<Field> playedTiles) {
+		return playedTiles.stream()
+				.filter(
+					field -> this.tilesArrangement.stream()
+					.map(Field::getCoordinates).equals(field.getCoordinates()) 
+				)
 				.count() > 0;
 	}
 	
-	private boolean atLeastOneTileShouldAdhereToAnotherOneAlreadyPlacedOnGameBoard(Map<Coordinates, Tile> playedTiles) {
-		return playedTiles.keySet().stream()
+	private boolean atLeastOneTileShouldAdhereToAnotherOneAlreadyPlacedOnGameBoard(List<Field> playedTiles) {
+		return playedTiles.stream()
 				.filter(playedTile -> {
-					int x = playedTile.getX();
-					int y = playedTile.getY();
+					int x = playedTile.getCoordinates().getX();
+					int y = playedTile.getCoordinates().getY();
 					try {
-						if (this.tilesArrangement.containsKey(new Coordinates(x-1, y))
-							|| this.tilesArrangement.containsKey(new Coordinates(x+1, y))
-							|| this.tilesArrangement.containsKey(new Coordinates(x, y+1))
-							|| this.tilesArrangement.containsKey(new Coordinates(x, y-1))
-								)
+						if (this.tilesArrangement.stream().map(Field::getCoordinates).equals(new Coordinates(x-1, y))
+							|| this.tilesArrangement.stream().map(Field::getCoordinates).equals(new Coordinates(x+1, y))
+							|| this.tilesArrangement.stream().map(Field::getCoordinates).equals(new Coordinates(x, y+1))
+							|| this.tilesArrangement.stream().map(Field::getCoordinates).equals(new Coordinates(x, y-1))) {
 							return true;
-						else
+						}
+						else {
 							return false;
+						}							
 					}
 					catch (Exception ex) {
 						return false;
@@ -212,7 +217,7 @@ public class GameBoard {
 				.count() > 0;
 	}
 	// TODO Implement word direction checker?
-	private boolean areTilesSeparated(Map<Coordinates, Tile> playedTiles) {
+	private boolean areTilesSeparated(List<Field> playedTiles) {
 		// find longest distance between tiles
 		// iterate through the first one to the last one and
 		// check if 
@@ -229,36 +234,40 @@ public class GameBoard {
 			boolean result = false;
 			// TODO separate this fragment to method findWord or something
 			int minX = 
-					playedTiles.keySet().stream()
-					.map(key -> key.getX())
+					playedTiles.stream()
+					.map(Field::getCoordinates)
+					.map(Coordinates::getX)
 					.reduce(BinaryOperator.minBy(Integer::compareTo))
 					.orElseThrow(() -> new IllegalStateException("Can't find min X coordination"));
 			int minY = 
-					playedTiles.keySet().stream()
-					.map(key -> key.getY())
+					playedTiles.stream()
+					.map(Field::getCoordinates)
+					.map(Coordinates::getY)
 					.reduce(BinaryOperator.minBy(Integer::compareTo))
 					.orElseThrow(() -> new IllegalStateException("Can't find min Y coordination"));
 			int maxX = 
-					playedTiles.keySet().stream()
-					.map(key -> key.getX())
+					playedTiles.stream()
+					.map(Field::getCoordinates)
+					.map(Coordinates::getX)
 					.reduce(BinaryOperator.maxBy(Integer::compareTo))
 					.orElseThrow(() -> new IllegalStateException("Can't find max X coordination"));
 			int maxY = 
-					playedTiles.keySet().stream()
-					.map(key -> key.getY())
+					playedTiles.stream()
+					.map(Field::getCoordinates)
+					.map(Coordinates::getY)
 					.reduce(BinaryOperator.maxBy(Integer::compareTo))
 					.orElseThrow(() -> new IllegalStateException("Can't find max Y coordination"));
 
 			List<Coordinates> fieldsSequence = new LinkedList<Coordinates>();
 			if (minX == maxX) {
 				result = !Stream.iterate(minY, n -> n+1).limit(maxY - minY)
-						.allMatch(n -> this.tilesArrangement.containsKey(new Coordinates(minX, n))
-									|| playedTiles.containsKey(new Coordinates(minX, n)));
+						.allMatch(n -> this.tilesArrangement.stream().map(Field::getCoordinates).equals(new Coordinates(minX, n))
+									|| playedTiles.stream().map(Field::getCoordinates).equals(new Coordinates(minX, n)));
 			}
 			else {
 				result = !Stream.iterate(minY, n -> n+1).limit(maxX - minX)
-						.allMatch(n -> this.tilesArrangement.containsKey(new Coordinates(minY, n))
-									|| playedTiles.containsKey(new Coordinates(minX, n)));
+						.allMatch(n -> this.tilesArrangement.stream().map(Field::getCoordinates).equals(new Coordinates(minY, n))
+									|| playedTiles.stream().map(Field::getCoordinates).equals(new Coordinates(minY, n)));
 			}
 			return result;
 		}

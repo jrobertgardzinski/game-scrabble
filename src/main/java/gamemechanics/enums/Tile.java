@@ -1,5 +1,6 @@
 package gamemechanics.enums;
 
+// TODO rename to polish_alphabet or something
 public enum Tile {
 	BLANK(' ',0),
 	A('A',1),
