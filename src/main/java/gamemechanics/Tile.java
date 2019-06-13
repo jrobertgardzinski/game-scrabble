@@ -1,31 +1,29 @@
 package gamemechanics;
 
 public class Tile {
-	private String letter;
+	private char letter;
 	private int points;
 
-	public Tile(String letter, int points) {
-		this.letter = letter;
+	public Tile(gamemechanics.enums.Tile tile) {		
+		this.letter = tile.getLetter();
+		this.points = tile.getPoints();
+	}
+	public Tile(char letter, int points) {		
+		this.letter = Character.toUpperCase(letter);
 		this.points = points;
 	}
-	public String getLetter() {
+	public char getLetter() {
 		return letter;
-	}
-	public void setLetter(String letter) {
-		this.letter = letter;
-	}
+	}	
 	public int getPoints() {
 		return points;
-	}
-	public void setPoints(int points) {
-		this.points = points;
 	}
 	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((letter == null) ? 0 : letter.hashCode());
+		result = prime * result + letter;
 		result = prime * result + points;
 		return result;
 	}
@@ -38,13 +36,12 @@ public class Tile {
 		if (getClass() != obj.getClass())
 			return false;
 		Tile other = (Tile) obj;
-		if (letter == null) {
-			if (other.letter != null)
-				return false;
-		} else if (!letter.equals(other.letter))
+		if (letter != other.letter)
 			return false;
 		if (points != other.points)
 			return false;
 		return true;
 	}
+	
+	
 }

@@ -26,11 +26,11 @@ class TileBagTest {
 
 		@BeforeEach
 		void setup() {
-			Tile a = new Tile("A", 1);
-			Tile b = new Tile("B", 3);
-			Tile c = new Tile("C", 2);
-			Tile d = new Tile("D", 2);
-			Tile e = new Tile("E", 1);
+			Tile a = new Tile('A', 1);
+			Tile b = new Tile('B', 3);
+			Tile c = new Tile('C', 2);
+			Tile d = new Tile('D', 2);
+			Tile e = new Tile('E', 1);
 			Tile[] letterSet = { a, b, c, d, e };
 			LinkedList<Tile> lettersForInitialization = new LinkedList<Tile>(Arrays.asList(letterSet));
 			fiveLettersBag = new TileBag(lettersForInitialization);
@@ -55,7 +55,7 @@ class TileBagTest {
 		// TODO Consider refactor of this test
 		@Test
 		void shouldDrawDifferentTileAtLeastOnceAfterTenAttempts() {
-			Tile tileI = new Tile("I", 1);
+			Tile tileI = new Tile('I', 1);
 			List<Tile> tileRack = Collections.nCopies(7, tileI);
 			List<Tile> tileToReplace = (List<Tile>) tileRack.subList(0, 1);
 			boolean drawnDifferentTile = false;
