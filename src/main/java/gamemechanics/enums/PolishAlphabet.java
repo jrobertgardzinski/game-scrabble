@@ -1,7 +1,6 @@
 package gamemechanics.enums;
 
-// TODO rename to polish_alphabet or something
-public enum Tile {
+public enum PolishAlphabet {
 	BLANK(' ',0),
 	A('A',1),
 	A_special('Ą',5),
@@ -39,7 +38,7 @@ public enum Tile {
 	private char letter;
 	private int points;
 	
-	Tile(char letter, int points) {
+	PolishAlphabet(char letter, int points) {
 		this.letter = letter;
 		this.points = points;
 	}

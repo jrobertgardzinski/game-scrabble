@@ -167,7 +167,6 @@ public class GameBoard {
 				.anyMatch(tile -> tile.getCoordinates().equals(CenterField));
 	}
 
-	// TODO use groupBy rather than two streams
 	private boolean tilesArrangedInLine(List<Field> playedTiles) {
 		boolean xCoordinatesChangesCorrectly =
 				playedTiles.stream()
@@ -218,21 +217,12 @@ public class GameBoard {
 	}
 	// TODO Implement word direction checker?
 	private boolean areTilesSeparated(List<Field> playedTiles) {
-		// find longest distance between tiles
-		// iterate through the first one to the last one and
-		// check if 
-		// playedTiles contains key 
-		// or
-		// tilesArrangement contains key
-		// else
-		// false					
 		if (playedTiles.size() == 1)
 		{
 			return true;
 		}
 		else {
 			boolean result = false;
-			// TODO separate this fragment to method findWord or something
 			int minX = 
 					playedTiles.stream()
 					.map(Field::getCoordinates)

@@ -2,6 +2,8 @@ package gamemechanics;
 
 import java.util.Map;
 
+import gamemechanics.enums.PolishAlphabet;
+
 public class Field {
 	Coordinates coordinates;
 	Tile tile;
@@ -10,7 +12,7 @@ public class Field {
 		super();
 		this.coordinates = new Coordinates(x, y);
 		
-		this.tile = new Tile(gamemechanics.enums.Tile.A);
+		this.tile = new Tile(PolishAlphabet.A);
 	}
 	
 	public Field(Coordinates coordinates, Tile tile) {

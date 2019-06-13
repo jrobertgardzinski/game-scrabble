@@ -2,24 +2,27 @@ package gamemechanics;
 
 import java.util.EnumSet;
 
+import gamemechanics.enums.PolishAlphabet;
+
+
 public class Tile {
 	private char letter;
 	private int points;
 
 	public Tile(char letter) {
-		for (gamemechanics.enums.Tile tile : gamemechanics.enums.Tile.values()) {
-			if (tile.getLetter() == letter) {	
-				this.letter = tile.getLetter();
+		for (PolishAlphabet tile : PolishAlphabet.values()) {
+			if (tile.getLetter() == letter) {
+				setLetter(tile.getLetter());
 				this.points = tile.getPoints();
 			}
 		}
 	}
-	public Tile(gamemechanics.enums.Tile tile) {		
-		this.letter = tile.getLetter();
+	public Tile(PolishAlphabet tile) {
+		setLetter(tile.getLetter());
 		this.points = tile.getPoints();
 	}
 	public Tile(char letter, int points) {		
-		this.letter = Character.toUpperCase(letter);
+		setLetter(letter);
 		this.points = points;
 	}
 	public char getLetter() {
@@ -27,6 +30,9 @@ public class Tile {
 	}	
 	public int getPoints() {
 		return points;
+	}
+	private void setLetter(char letter) {
+		this.letter = Character.toUpperCase(letter);
 	}
 	
 	@Override

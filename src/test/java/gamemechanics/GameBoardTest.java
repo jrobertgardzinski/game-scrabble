@@ -123,5 +123,5 @@ class GameBoardTest {
 		}
 	}
 
-	//TODO consider creation of nested Premium tests
+	//TODO consider creation of nested Premium tests if Word Combiner
 }
