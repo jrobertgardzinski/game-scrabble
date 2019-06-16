@@ -9,7 +9,7 @@ public class Field {
 	private Coordinates coordinates;
 	private Tile tile;
 	private Premium premium;
-
+	
 	public Field(Builder builder) {
 		this.coordinates = builder.coordinates;
 		this.tile = builder.tile;

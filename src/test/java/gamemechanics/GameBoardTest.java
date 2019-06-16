@@ -61,28 +61,36 @@ class GameBoardTest {
 	@Nested
 	class HandlingLogicOfFurtherMoves {
 		List<Field> tilesToPlay;
-		List<Field> tilesOnBoard;
+		Field[][] tilesOnBoard;
 				
 		@BeforeEach
 		void reinitializePlayedTiles() {
 			tilesToPlay = new LinkedList<Field>();
 			
-			tilesOnBoard = new LinkedList<Field>();
+			tilesOnBoard = new Field [15][15];
+			
+
+			for (int x = 0; x < 15; x++) {
+				for (int y = 0; y < 15; y++) {
+					tilesOnBoard[x][y] = new Field.Builder(x+1, y+1).build();
+				}
+			}
+			
 			// Given tiles will produce words:
 			// AWIZO
 			// ZDRÓW
 			// BÓL
-			tilesOnBoard.add(new Field.Builder(8,8).setTile('A').build());
-			tilesOnBoard.add(new Field.Builder(8,9).setTile('W').build());
-			tilesOnBoard.add(new Field.Builder(8,10).setTile('I').build());
-			tilesOnBoard.add(new Field.Builder(8,11).setTile('Z').build());
-			tilesOnBoard.add(new Field.Builder(8,12).setTile('O').build());
-			tilesOnBoard.add(new Field.Builder(9,11).setTile('D').build());
-			tilesOnBoard.add(new Field.Builder(10,11).setTile('R').build());
-			tilesOnBoard.add(new Field.Builder(11,11).setTile('Ó').build());
-			tilesOnBoard.add(new Field.Builder(12,11).setTile('W').build());
-			tilesOnBoard.add(new Field.Builder(11,10).setTile('B').build());
-			tilesOnBoard.add(new Field.Builder(11,12).setTile('L').build());
+			tilesOnBoard[7][7] = new Field.Builder(8,8).setTile('A').build();
+			tilesOnBoard[7][8] = new Field.Builder(8,9).setTile('W').build();
+			tilesOnBoard[7][9] = new Field.Builder(8,10).setTile('I').build();
+			tilesOnBoard[7][10] = new Field.Builder(8,11).setTile('Z').build();
+			tilesOnBoard[7][11] = new Field.Builder(8,12).setTile('O').build();
+			tilesOnBoard[8][10] = new Field.Builder(9,11).setTile('D').build();
+			tilesOnBoard[9][10] = new Field.Builder(10,11).setTile('R').build();
+			tilesOnBoard[10][10] = new Field.Builder(11,11).setTile('Ó').build();
+			tilesOnBoard[11][10] = new Field.Builder(12,11).setTile('W').build();
+			tilesOnBoard[10][9] = new Field.Builder(11,10).setTile('B').build();
+			tilesOnBoard[10][11] = new Field.Builder(11,12).setTile('L').build();
 			
 			gameBoard.setTilesArrangement(tilesOnBoard);
 		}

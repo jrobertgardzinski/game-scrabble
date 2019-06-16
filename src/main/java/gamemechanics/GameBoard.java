@@ -11,7 +11,8 @@ import java.util.stream.Stream;
 import gamemechanics.enums.Premium;
 
 public class GameBoard {
-	private List<Field> tilesArrangement = new LinkedList<Field>(); 
+	private static final int boardSize = 15;
+	private Field[][] tilesArrangement = new Field[boardSize][boardSize]; 
 	private List<Field> previosulyPlayedTiles = new LinkedList<Field>();
 	//Premium fields coordinates
 	private final Coordinates CenterField = new Coordinates(8, 8);
@@ -101,17 +102,22 @@ public class GameBoard {
 	private Map<Coordinates, Premium> premiumFields = new HashMap<Coordinates, Premium>();
 	
 	public GameBoard() {
+		for (int x = 0; x < boardSize; x++) {
+			for (int y = 0; y < boardSize; y++) {
+				this.tilesArrangement[x][y] = new Field.Builder(x+1, y+1).build();
+			}
+		}
 		Arrays.stream(doubleLetter).forEach(element -> {premiumFields.put(element, Premium.DOUBLE_LETTER);});
 		Arrays.stream(tripleLetter).forEach(element -> {premiumFields.put(element, Premium.TRIPLE_LETTER);});
 		Arrays.stream(doubleWord).forEach(element -> {premiumFields.put(element, Premium.DOUBLE_WORD);});
 		Arrays.stream(tripleWord).forEach(element -> {premiumFields.put(element, Premium.TRIPLE_WORD);});
 	}
 	
-	public List<Field> getTilesArrangement() {
+	public Field[][] getTilesArrangement() {
 		return tilesArrangement;
 	}
 
-	public void setTilesArrangement(List<Field> tilesArrangement) {
+	public void setTilesArrangement(Field[][] tilesArrangement) {
 		this.tilesArrangement = tilesArrangement;
 	}
 
@@ -129,7 +135,11 @@ public class GameBoard {
 	}
 	
 	public void updateTheBoardAndFlushPreviouslyPlayedTiles() {
-		this.tilesArrangement.addAll(previosulyPlayedTiles);
+		previosulyPlayedTiles.stream().forEach(field -> {
+			int x = field.getCoordinates().getX();
+			int y = field.getCoordinates().getY();
+			tilesArrangement[x][y] = field;
+		});
 		flushPreviouslyPlayedTiles();
 	}
 	
@@ -159,7 +169,13 @@ public class GameBoard {
 	}
 	
 	private boolean isFirstPlayedWord() {
-		return this.previosulyPlayedTiles.isEmpty() && this.tilesArrangement.isEmpty();
+		return this.previosulyPlayedTiles.isEmpty() && isGameBoardEmpty();
+	}
+	
+	private boolean isGameBoardEmpty() {
+		return Stream.of(this.tilesArrangement)
+			.flatMap(fieldRows -> Arrays.stream(fieldRows))
+			.allMatch(field -> field.getTile() == null);
 	}
 	
 	private boolean noneOfTilesPlacedOnCenterOfGameBoard(List<Field> playedTiles) {
@@ -186,7 +202,8 @@ public class GameBoard {
 	private boolean atLeastOneFieldIsAlreadyOccupied(List<Field> playedTiles) {
 		return playedTiles.stream()
 				.filter(
-					field -> this.tilesArrangement.stream()
+					field -> Stream.of(this.tilesArrangement)
+					.flatMap(fieldRows -> Arrays.stream(fieldRows))
 					.map(Field::getCoordinates).equals(field.getCoordinates()) 
 				)
 				.count() > 0;
@@ -198,10 +215,14 @@ public class GameBoard {
 					int x = playedTile.getCoordinates().getX();
 					int y = playedTile.getCoordinates().getY();
 					try {
-						if (this.tilesArrangement.stream().map(Field::getCoordinates).equals(new Coordinates(x-1, y))
-							|| this.tilesArrangement.stream().map(Field::getCoordinates).equals(new Coordinates(x+1, y))
-							|| this.tilesArrangement.stream().map(Field::getCoordinates).equals(new Coordinates(x, y+1))
-							|| this.tilesArrangement.stream().map(Field::getCoordinates).equals(new Coordinates(x, y-1))) {
+						if (Stream.of(this.tilesArrangement)
+								.flatMap(fieldRows -> Arrays.stream(fieldRows)).map(Field::getCoordinates).equals(new Coordinates(x-1, y))
+							|| Stream.of(this.tilesArrangement)
+							.flatMap(fieldRows -> Arrays.stream(fieldRows)).map(Field::getCoordinates).equals(new Coordinates(x+1, y))
+							|| Stream.of(this.tilesArrangement)
+							.flatMap(fieldRows -> Arrays.stream(fieldRows)).map(Field::getCoordinates).equals(new Coordinates(x, y+1))
+							|| Stream.of(this.tilesArrangement)
+							.flatMap(fieldRows -> Arrays.stream(fieldRows)).map(Field::getCoordinates).equals(new Coordinates(x, y-1))) {
 							return true;
 						}
 						else {
@@ -251,12 +272,14 @@ public class GameBoard {
 			List<Coordinates> fieldsSequence = new LinkedList<Coordinates>();
 			if (minX == maxX) {
 				result = !Stream.iterate(minY, n -> n+1).limit(maxY - minY)
-						.allMatch(n -> this.tilesArrangement.stream().map(Field::getCoordinates).equals(new Coordinates(minX, n))
+						.allMatch(n -> Stream.of(this.tilesArrangement)
+								.flatMap(fieldRows -> Arrays.stream(fieldRows)).map(Field::getCoordinates).equals(new Coordinates(minX, n))
 									|| playedTiles.stream().map(Field::getCoordinates).equals(new Coordinates(minX, n)));
 			}
 			else {
 				result = !Stream.iterate(minY, n -> n+1).limit(maxX - minX)
-						.allMatch(n -> this.tilesArrangement.stream().map(Field::getCoordinates).equals(new Coordinates(minY, n))
+						.allMatch(n -> Stream.of(this.tilesArrangement)
+								.flatMap(fieldRows -> Arrays.stream(fieldRows)).map(Field::getCoordinates).equals(new Coordinates(minY, n))
 									|| playedTiles.stream().map(Field::getCoordinates).equals(new Coordinates(minY, n)));
 			}
 			return result;
