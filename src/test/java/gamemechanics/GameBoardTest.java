@@ -69,13 +69,6 @@ class GameBoardTest {
 			
 			tilesOnBoard = new Field [15][15];
 			
-
-			for (int x = 0; x < 15; x++) {
-				for (int y = 0; y < 15; y++) {
-					tilesOnBoard[x][y] = new Field.Builder(x+1, y+1).build();
-				}
-			}
-			
 			// Given tiles will produce words:
 			// AWIZO
 			// ZDRÓW

@@ -118,7 +118,14 @@ public class GameBoard {
 	}
 
 	public void setTilesArrangement(Field[][] tilesArrangement) {
-		this.tilesArrangement = tilesArrangement;
+		Stream.of(tilesArrangement).flatMap(fields -> Arrays.stream(fields))
+		.filter(field -> field != null)
+		.forEach(field -> {
+			int x = field.getCoordinates().getX();
+			int y = field.getCoordinates().getY();
+			
+			this.tilesArrangement[x][y] = field;
+		});
 	}
 
 	public List<Field> getPreviosulyPlayedTiles() {
