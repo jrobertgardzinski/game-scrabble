@@ -68,4 +68,40 @@ public class Field {
 			return new Field(this);
 		}
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((coordinates == null) ? 0 : coordinates.hashCode());
+		result = prime * result + ((premium == null) ? 0 : premium.hashCode());
+		result = prime * result + ((tile == null) ? 0 : tile.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Field other = (Field) obj;
+		if (coordinates == null) {
+			if (other.coordinates != null)
+				return false;
+		} else if (!coordinates.equals(other.coordinates))
+			return false;
+		if (premium != other.premium)
+			return false;
+		if (tile == null) {
+			if (other.tile != null)
+				return false;
+		} else if (!tile.equals(other.tile))
+			return false;
+		return true;
+	}
+	
+	
 }
