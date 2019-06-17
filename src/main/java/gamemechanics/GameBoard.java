@@ -142,12 +142,16 @@ public class GameBoard {
 	}
 	
 	public void updateTheBoardAndFlushPreviouslyPlayedTiles() {
+		updateTheBoard();
+		flushPreviouslyPlayedTiles();
+	}
+	
+	private void updateTheBoard() {
 		previosulyPlayedTiles.stream().forEach(field -> {
 			int x = field.getCoordinates().getX();
 			int y = field.getCoordinates().getY();
 			tilesArrangement[x][y] = field;
 		});
-		flushPreviouslyPlayedTiles();
 	}
 	
 	public List<Field> removePreviouslyPlayedTiles() {
@@ -173,6 +177,7 @@ public class GameBoard {
 			throw new IllegalArgumentException("Played tiles should not be separated!");
 		}
 		this.previosulyPlayedTiles = playedTiles;
+		updateTheBoard();
 	}
 	
 	private boolean isFirstPlayedWord() {
@@ -194,12 +199,14 @@ public class GameBoard {
 		boolean xCoordinatesChangesCorrectly =
 				playedTiles.stream()
 				.map(Field::getCoordinates)
+				.map(Coordinates::getX)
 				.distinct()
 				.limit(2)
 				.count() == 1;
 		boolean yCoordinatesChangesCorrectly =
 				playedTiles.stream()
 				.map(Field::getCoordinates)
+				.map(Coordinates::getY)
 				.distinct()
 				.limit(2)
 				.count() == 1;
@@ -209,9 +216,12 @@ public class GameBoard {
 	private boolean atLeastOneFieldIsAlreadyOccupied(List<Field> playedTiles) {
 		return playedTiles.stream()
 				.filter(
-					field -> Stream.of(this.tilesArrangement)
-					.flatMap(fieldRows -> Arrays.stream(fieldRows))
-					.map(Field::getCoordinates).equals(field.getCoordinates()) 
+					field -> {
+						int x = field.getCoordinates().getX();
+						int y = field.getCoordinates().getY();
+						
+						return this.tilesArrangement[x][y].getTile() != null; 
+					}
 				)
 				.count() > 0;
 	}
@@ -222,14 +232,10 @@ public class GameBoard {
 					int x = playedTile.getCoordinates().getX();
 					int y = playedTile.getCoordinates().getY();
 					try {
-						if (Stream.of(this.tilesArrangement)
-								.flatMap(fieldRows -> Arrays.stream(fieldRows)).map(Field::getCoordinates).equals(new Coordinates(x-1, y))
-							|| Stream.of(this.tilesArrangement)
-							.flatMap(fieldRows -> Arrays.stream(fieldRows)).map(Field::getCoordinates).equals(new Coordinates(x+1, y))
-							|| Stream.of(this.tilesArrangement)
-							.flatMap(fieldRows -> Arrays.stream(fieldRows)).map(Field::getCoordinates).equals(new Coordinates(x, y+1))
-							|| Stream.of(this.tilesArrangement)
-							.flatMap(fieldRows -> Arrays.stream(fieldRows)).map(Field::getCoordinates).equals(new Coordinates(x, y-1))) {
+						if (this.tilesArrangement[x-1][y].getTile() != null
+							|| this.tilesArrangement[x+1][y].getTile() != null
+							|| this.tilesArrangement[x][y-1].getTile() != null
+							|| this.tilesArrangement[x][y+1].getTile() != null ){
 							return true;
 						}
 						else {
@@ -276,18 +282,13 @@ public class GameBoard {
 					.reduce(BinaryOperator.maxBy(Integer::compareTo))
 					.orElseThrow(() -> new IllegalStateException("Can't find max Y coordination"));
 
-			List<Coordinates> fieldsSequence = new LinkedList<Coordinates>();
 			if (minX == maxX) {
 				result = !Stream.iterate(minY, n -> n+1).limit(maxY - minY)
-						.allMatch(n -> Stream.of(this.tilesArrangement)
-								.flatMap(fieldRows -> Arrays.stream(fieldRows)).map(Field::getCoordinates).equals(new Coordinates(minX, n))
-									|| playedTiles.stream().map(Field::getCoordinates).equals(new Coordinates(minX, n)));
+						.allMatch(n -> this.tilesArrangement[minX][n].getTile() != null || playedTilesHasCoordinates(minX, n, playedTiles));
 			}
 			else {
-				result = !Stream.iterate(minY, n -> n+1).limit(maxX - minX)
-						.allMatch(n -> Stream.of(this.tilesArrangement)
-								.flatMap(fieldRows -> Arrays.stream(fieldRows)).map(Field::getCoordinates).equals(new Coordinates(minY, n))
-									|| playedTiles.stream().map(Field::getCoordinates).equals(new Coordinates(minY, n)));
+				result = !Stream.iterate(minX, n -> n+1).limit(maxX - minX)
+						.allMatch(n -> this.tilesArrangement[n][minY].getTile() != null || playedTilesHasCoordinates(n, minY, playedTiles));
 			}
 			return result;
 		}
@@ -295,5 +296,13 @@ public class GameBoard {
 	
 	public Premium getPremiumIfExists(Coordinates coordinates) {
 		return premiumFields.get(coordinates);
+	}
+	
+	private boolean playedTilesHasCoordinates(int x, int y, List<Field> previouslyPlayedTiles) {
+		boolean result = previouslyPlayedTiles.stream()
+				.map(Field::getCoordinates)
+				.filter(coordinates -> coordinates.getX() == x && coordinates.getY() == y)
+				.count() > 0;
+		return result;
 	}
 }
