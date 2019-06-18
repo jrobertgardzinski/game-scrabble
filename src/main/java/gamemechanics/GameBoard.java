@@ -107,10 +107,10 @@ public class GameBoard {
 				this.tilesArrangement[x][y] = new Field.Builder(x+1, y+1).build();
 			}
 		}
-		Arrays.stream(doubleLetter).forEach(element -> {premiumFields.put(element, Premium.DOUBLE_LETTER);});
-		Arrays.stream(tripleLetter).forEach(element -> {premiumFields.put(element, Premium.TRIPLE_LETTER);});
-		Arrays.stream(doubleWord).forEach(element -> {premiumFields.put(element, Premium.DOUBLE_WORD);});
-		Arrays.stream(tripleWord).forEach(element -> {premiumFields.put(element, Premium.TRIPLE_WORD);});
+		Arrays.stream(doubleLetter).forEach(element -> { this.tilesArrangement[element.getX()-1][element.getY()-1].setPremium(Premium.DOUBLE_LETTER); });
+		Arrays.stream(tripleLetter).forEach(element -> { this.tilesArrangement[element.getX()-1][element.getY()-1].setPremium(Premium.TRIPLE_LETTER); });
+		Arrays.stream(doubleWord).forEach(element -> { this.tilesArrangement[element.getX()-1][element.getY()-1].setPremium(Premium.DOUBLE_WORD); });
+		Arrays.stream(tripleWord).forEach(element -> { this.tilesArrangement[element.getX()-1][element.getY()-1].setPremium(Premium.TRIPLE_WORD); });
 	}
 	
 	public Field[][] getTilesArrangement() {
@@ -170,9 +170,9 @@ public class GameBoard {
 		else if (atLeastOneFieldIsAlreadyOccupied(playedTiles)) {
 			throw new IllegalArgumentException("At least one field is already occupied by another tile!");
 		}
-		else if (!atLeastOneTileShouldAdhereToAnotherOneAlreadyPlacedOnGameBoard(playedTiles)) {
-			throw new IllegalArgumentException("At least one tile should adhere tile placed on game board!");
-		}
+//		else if (!atLeastOneTileShouldAdhereToAnotherOneAlreadyPlacedOnGameBoard(playedTiles)) {
+//			throw new IllegalArgumentException("At least one tile should adhere tile placed on game board!");
+//		}
 		else if (areTilesSeparated(playedTiles)) {
 			throw new IllegalArgumentException("Played tiles should not be separated!");
 		}

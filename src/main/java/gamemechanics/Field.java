@@ -36,6 +36,10 @@ public class Field {
 		return premium;
 	}
 
+	public void setPremium(Premium premium) {
+		this.premium = premium;
+	}
+
 	public static class Builder {
 		private Coordinates coordinates;
 		private Tile tile;
