@@ -38,9 +38,9 @@ class ScoreKeeperTest {
 			
 			List<Word> words = new ArrayList<Word>();
 			List<Field> list1 = new ArrayList<Field>();				// 6
-			list1.add(new Field.Builder(8,8).setTile('T').build());
+			list1.add(new Field.Builder(8,8).setTile('T').setPremium(Premium.DOUBLE_WORD).build());
 			list1.add(new Field.Builder(8,9).setTile('A').build()); 
-			List<Field> list2 = new ArrayList<Field>();				// 9
+			List<Field> list2 = new ArrayList<Field>();				// 10
 			list2.add(new Field.Builder(7,9).setTile('P').setPremium(Premium.DOUBLE_LETTER).build());
 			list2.add(new Field.Builder(8,9).setTile('A').build());
 			list2.add(new Field.Builder(9,9).setTile('N').setPremium(Premium.DOUBLE_LETTER).build());
@@ -53,8 +53,8 @@ class ScoreKeeperTest {
 			combined.add(word2);
 			
 			ScoreKeeper scoreKeeper = new ScoreKeeper(combined);
-			scoreKeeper.calculate();
 			
-			assertThrows(IllegalArgumentException.class, () -> { gameBoard.playTiles(playedTiles); });
+			assertEquals(16, scoreKeeper.calculate().getTotal());
 		}
 	}
+}

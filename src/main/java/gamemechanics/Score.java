@@ -10,7 +10,7 @@ public class Score {
 	public Score(List<Word> combinedWords, List<Integer> scorePerWord) {
 		this.combinedWords = combinedWords;
 		this.scorePerWord = scorePerWord;
-		this.total = (int)this.scorePerWord.stream().count();
+		this.total = (int)this.scorePerWord.stream().reduce(0, (result, score) -> result += score);
 	}
 
 	public List<Word> getCombinedWords() {
