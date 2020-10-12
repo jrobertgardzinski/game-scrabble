@@ -5,12 +5,13 @@ import java.util.LinkedList;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import gamemechanics.LetterBag;
+import gamemechanics.TileBag;
+import gamemechanics.Tile;
 
 @SpringBootApplication
 public class GameScrabbleApplication {
 
-	public static void main(String[] args) { 	 		
+	public static void main(String[] args) { 	
 		SpringApplication.run(GameScrabbleApplication.class, args);
 	}
 
